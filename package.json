@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js"
+    "dev": "nodemon backend/server.js",
+    "client" : "npm start --prefix frontend"
   },
   "author": "G Goutham Reddy",
   "license": "ISC",
