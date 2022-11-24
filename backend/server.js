@@ -5,7 +5,7 @@ const passport = require('passport')
  
 const cookieSessions = require('./middleware/cookieSession');
 const passportConfig = require('./config/passport');
-
+const authRoutes = require('./routes/auth')
 // config
 const db = require('./config/db');
 const port = 5000
@@ -21,8 +21,10 @@ app.use(passport.session());
 //root 
 app.get('/',(req,res) => {
 
-    res.send("Okkkk")
+    res.send("Welcome to workverse API ")
 })
+
+app.auth('/auth', authRoutes)
 
 
 
