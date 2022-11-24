@@ -24,6 +24,11 @@ export default function Login() {
         window.open(`${process.env.REACT_APP_API_URL}/auth/google/callback`,
         "_self")
     } 
+
+    const logoutWithGoogle =  () => {
+        window.open(`${process.env.REACT_APP_API_URL}/auth/logout`,
+        "_self")
+    } 
   return (
     <div>
         <h1>Login Form</h1>
@@ -48,6 +53,7 @@ export default function Login() {
             <button type="submit" name="login">login</button>
         </form>
         <button type='button' onClick={loginWithGoogle}>Login with Google</button>
+        <button type='button' onClick={logoutWithGoogle}>Login out</button>
     </div>
   )
 }
