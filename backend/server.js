@@ -4,6 +4,7 @@ const cors = require('cors')
 const passport = require('passport')
  
 const cookieSessions = require('./middleware/cookieSession');
+const passportConfig = require('./config/passport');
 
 // config
 const db = require('./config/db');
@@ -13,11 +14,17 @@ const app = express()
 //Cookie Session required middleware 
 app.use(cookieSessions)
 
+app.use(passport.initialize())
+app.use(passport.session());
+
+// TODO:need to add cors with methods GET,POST,PUT,DELETE credentials:true 
 //root 
 app.get('/',(req,res) => {
 
     res.send("Okkkk")
 })
+
+
 
 
 db.getConnection((err,connection) => {
