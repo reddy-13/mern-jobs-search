@@ -1,9 +1,8 @@
-const cookieSession = require("cookie-session")
-// Adding required middlewares
-const cookieSessions = app.use(cookieSession({
-    name: 'authSession',
-    keys: ["xxxxKKKsdsdsd@!@#$%^&&***"],
-    maxAge: 24*60*60*100
-}))
 
-module.exports = cookieSessions
+// const express = require("express")
+// const app = express()
+// const cookieSession = require("cookie-session")
+// // Adding required middlewares
+// // const cookieSessions = 
+
+// module.exports = cookieSessions

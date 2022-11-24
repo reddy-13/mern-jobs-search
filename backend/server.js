@@ -2,8 +2,8 @@
 const express = require("express")
 const cors = require('cors')
 const passport = require('passport')
- 
-const cookieSessions = require('./middleware/cookieSession');
+const cookieSession = require("cookie-session")
+// const cookieSessions = require('./middleware/cookieSession');
 const passportConfig = require('./config/passport');
 const authRoutes = require('./routes/auth')
 // config
@@ -12,7 +12,11 @@ const port = 5000
 const app = express()
 
 //Cookie Session required middleware 
-app.use(cookieSessions)
+app.use(cookieSession({
+    name: 'authSession',
+    keys: ["xxxxKKKsdsdsd@!@#$%^&&***"],
+    maxAge: 24*60*60*100
+}))
 
 app.use(passport.initialize())
 app.use(passport.session());
@@ -24,7 +28,7 @@ app.get('/',(req,res) => {
     res.send("Welcome to workverse API ")
 })
 
-app.auth('/auth', authRoutes)
+app.use('/auth', authRoutes)
 
 
 
