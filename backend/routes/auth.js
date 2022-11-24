@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 const passport = require('passport')
-
+const db = require("../config/db");
 
 router.get("/login/success", (req, res ) =>{
     if(req.user){
@@ -30,7 +30,12 @@ router.get(
     passport.authenticate("google",{
         successRedirect: process.env.CLIENT_URL,
         failureRedirect: "login/faild",
-    })
+    }),
+    (req,res) => {
+        if(req.user){
+            console.log("user", res.user);
+        }
+    }
 )
 
 
