@@ -28,6 +28,16 @@ export const authCheck = createAsyncThunk('auth/check', async (user, thunkAPI) =
     }
 })
 
+export const updatePassword = createAsyncThunk('auth/updatePassword', async (user, thunkAPI) => {
+    try {
+        return await authService.updatePassword(user) // 
+    } catch (error) {
+        const message = (error.response 
+            && error.response.data 
+            && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
 
 export const authSlice = createSlice({
     name:'auth',
@@ -52,6 +62,22 @@ export const authSlice = createSlice({
             state.user = action.payload
         })
         .addCase(authCheck.rejected, (state, action) => {
+            console.log("stat rejected", state);
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+            state.user = null
+        })
+        .addCase(updatePassword.pending,(state) =>{
+            state.isLoading = true
+            console.log("stat pening", state);
+        })
+        .addCase(updatePassword.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = false
+            state.user = action.payload
+        })
+        .addCase(updatePassword.rejected, (state, action) => {
             console.log("stat rejected", state);
             state.isLoading = false
             state.isError = true

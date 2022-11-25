@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Outlet} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import './App.css';
 import Login from './pages/Login';
@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Axios from 'axios'
 import Dashboard from './pages/Dashboard';
 import { authCheck, reset  } from './features/authSlice'
+import TopNavigation from './components/TopNavigation';
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -37,17 +38,10 @@ function App() {
 
   return (
     <>
-    <Router>
-        <div className='container'>
-          
-          <Routes>
-            if(user){
-              <Route path='/' element={<Dashboard/>} />
-            }
-            <Route path='/login' element={<Login />} />
-          </Routes>
-        </div>
-      </Router>
+    <div className='container'>
+        <TopNavigation/>
+        <Outlet/>
+    </div>
     </>
   );
 }

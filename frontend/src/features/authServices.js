@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const AUTH_CHECK_URL = '/auth/login/success'
+const UPDATE_PASSWORD_URL ='/auth/profile/password';
 
 // Auth check
 const authCheck = async (userData) =>{
@@ -15,10 +16,18 @@ const authCheck = async (userData) =>{
     return response.data
 }
 
+const updatePassword = async (userData) =>{
+    const response = await axios.post(AUTH_CHECK_URL,userData,{
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    })
+    return response.data
+}
+
 
 
 const authService = {
     authCheck,
+    updatePassword,
 }
 
 export default authService;
