@@ -18,24 +18,32 @@ app.use(cookieSession({
     maxAge: 24*60*60*100
 }))
 
-app.use(passport.initialize())
-app.use(passport.session());
 
-app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+
 
 // TODO:need to add cors with methods GET,POST,PUT,DELETE credentials:true 
 app.use(cors({
     origin: "http://localhost:3000", 
-    methods: "GET,POST,PUT,DELTE", //only localhost:3000 can access this server
+    methods: "GET,POST,PUT,DELETE", //only localhost:3000 can access this server
     credentials: true  //Responding with this header to true means that the server allows cookies (or other user credentials) to be included on cross-origin requests. 
 }))
+
+
+app.use(passport.initialize())
+app.use(passport.session());
+
+app.use(express.json()) 
+app.use(express.urlencoded({extended: false}));
+
+
 
 //root 
 app.get('/',(req,res) => {
 
     res.send("Welcome to workverse API ")
 })
+
+
 
 app.use('/auth', authRoutes)
 

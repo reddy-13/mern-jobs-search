@@ -26,8 +26,10 @@ export default function Login() {
     } 
 
     const logoutWithGoogle =  () => {
+        
         window.open(`${process.env.REACT_APP_API_URL}/auth/logout`,
         "_self")
+        
     } 
   return (
     <div>

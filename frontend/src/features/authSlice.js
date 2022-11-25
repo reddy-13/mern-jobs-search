@@ -28,6 +28,18 @@ export const authCheck = createAsyncThunk('auth/check', async (user, thunkAPI) =
     }
 })
 
+export const updatePassword = createAsyncThunk('auth/updatePassword', async (user, thunkAPI) => {
+    try {
+        console.log('update pass',user);
+        return await authService.updatePassword(user) // update password data 
+    } catch (error) {
+        const message = (error.response 
+            && error.response.data 
+            && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 
 export const authSlice = createSlice({
     name:'auth',
@@ -57,6 +69,19 @@ export const authSlice = createSlice({
             state.isError = true
             state.message = action.payload
             state.user = null
+        })
+        .addCase(updatePassword.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(updatePassword.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.user.push(action.payload)
+        })
+        .addCase(updatePassword.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
         })
     }
 })
