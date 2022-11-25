@@ -6,9 +6,7 @@ const db = require("../config/db");
 router.get("/login/success", (req, res ) =>{
     if(req.user){
         res.status(200).json({
-            error:false,
-            message:"login successfull",
-            user: req.user,
+            user: req.user[0],
          })
     }else{
         res.status(403).json({error:true, messgae: "Not authorised"})
