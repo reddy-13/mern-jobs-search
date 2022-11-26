@@ -6,7 +6,7 @@ body{
     color: #414141;
 }
 
-/* scroll bass css */
+/* scroll bass css */   
 body::-webkit-scrollbar {
     width: 0.3em;
   

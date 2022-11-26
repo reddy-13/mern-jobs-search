@@ -41,12 +41,12 @@ function Profile() {
     }
 
     useEffect(() => {
-        if(user){
+        if(isSuccess || user){
             console.log('profile ', user);
         }else{
             navigate('/')
         }
-    },[user, isError, isSuccess, message])
+    },[])
   return (
     <div className='dashboard profile'>
         <h1>Profile</h1>

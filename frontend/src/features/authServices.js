@@ -17,8 +17,9 @@ const authCheck = async (userData) =>{
 }
 
 const updatePassword = async (userData) =>{
-    const response = await axios.post(AUTH_CHECK_URL,userData,{
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    
+    const response = await axios.post(UPDATE_PASSWORD_URL,userData,{
+        headers: { 'Content-Type': 'application/json' },
     })
     return response.data
 }
