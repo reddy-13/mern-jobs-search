@@ -14,7 +14,7 @@ function Dashboard() {
     return <Login/>
   }
   return (
-    <div>
+    <div className='dashboard'>
         <h1>Welcome {user ? user.user.username : 'No user'}</h1>
     </div>
   )
