@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 // import { Outlet, useNavigate} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {createBrowserRouter, BrowserRouter as Router, Routes, Route , RouterProvider} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import './App.css';
 import Login from './pages/Login';
@@ -12,6 +12,8 @@ import Dashboard from './pages/Dashboard';
 import { authCheck, reset  } from './features/authSlice'
 import TopNavigation from './components/TopNavigation';
 import Profile from './pages/Profile';
+import ErrorPage from './pages/error-page';
+import UpdateProfile from './pages/UpdateProfile';
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -35,39 +37,49 @@ function App() {
         console.log("login user", user);
         
       }else{
-        dispatch(authCheck())
+        // dispatch(authCheck())
       }
-      dispatch(reset())
+      //  dispatch(reset())
      
   }, [user, isError, isSuccess, message]);
   
-  if(!user){
-    <>
-    <Router>
-        <div className='container'>
-        <Routes>
-          <Route index path='/' element={<Login/>}/>
-        </Routes>             
-        </div>
-    </Router>
-    <ToastContainer/>
-    </>
+
+  const router = createBrowserRouter([
+  {
+    path : '/',
+    element: <Login/>,
+    errorElement : <ErrorPage/>,
+    index: true,
+  },
+  {
+    path : '/reset/:token',
+    element : <UpdateProfile/>
   }
+]);
+
+
+const protectedRouter = createBrowserRouter([
   
+  {
+    path: "/",
+    element: <App/>,
+    children: [
+      { 
+        index: true,  
+        element: <Dashboard/> 
+      },
+      {
+        path :'/profile',
+        element: <Profile/>
+      }
+    ],
+  },
+  
+],
+)
+
   return (
-    <>
-    <Router>
-        <div className='container'>
-        {user &&  <TopNavigation/>}
-        <Routes>
-          <Route index path='/' element={<Dashboard/>} />
-          <Route path='/profile' element={<Profile/>} />
-        </Routes>             
-        </div>
-    </Router>
-    <ToastContainer/>
-      
-    </>
+    <RouterProvider router={user ? protectedRouter : router} />
   );
 }
 

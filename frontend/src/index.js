@@ -22,39 +22,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 // const user = localStorage.getItem('user');
-// const router = createBrowserRouter([
-//   {
-//     path : '/',
-//     element: <Login/>,
-//     errorElement : <ErrorPage/>,
-//     index: true,
-//   },
-//   {
-//     path : '/login',
-//     element : <Login/>
-//   }
-// ]);
 
-
-// const protectedRouter = createBrowserRouter([
-  
-//   {
-//     path: "/",
-//     element: <App/>,
-//     children: [
-//       { 
-//         index: true,  
-//         element: <Dashboard/> 
-//       },
-//       {
-//         path :'/profile',
-//         element: <Profile/>
-//       }
-//     ],
-//   },
-  
-// ],
-// )
 
 
 
