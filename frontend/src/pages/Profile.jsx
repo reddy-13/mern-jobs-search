@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { updatePassword } from '../features/authSlice';
 import {  toast } from 'react-toastify';
+import Loader from '../components/Loader';
 
 function Profile() {
     const [form, setForm] = useState({
@@ -54,6 +55,9 @@ function Profile() {
             navigate('/')
         }
     }, [user, isError, isSuccess, message, navigate, dispatch])
+
+    if(isLoading) return <Loader/>
+
   return (
     <div className='dashboard profile'>
         <h1>Profile</h1>

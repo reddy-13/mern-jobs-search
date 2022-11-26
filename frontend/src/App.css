@@ -9,19 +9,40 @@ body{
 /* scroll bass css */   
 body::-webkit-scrollbar {
     width: 0.3em;
-  
-  }
-  
-  
-  body::-webkit-scrollbar-track {
+
+}
+body::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  }
-  
-  body::-webkit-scrollbar-thumb {
+}
+body::-webkit-scrollbar-thumb {
     background-color: #3b3634;
     outline: 1px solid rgba(240, 240, 240, 0.116);
     border-radius: 25px;
+}
+
+/* spinner or loader */
+.loader-container{
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+
+}
+.loader {
+    /* border: 16px solid #f3f3f3; // Light grey */
+    border-top: 16px solid whitesmoke;
+  border-bottom: 16px solid rgb(63, 8, 116);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
   }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+/* spinner or loader ends*/
 .container{
     padding: 0;
     margin: 0;
