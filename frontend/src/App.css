@@ -90,12 +90,21 @@ body::-webkit-scrollbar-thumb {
     background-color: #f3f3f3;
 }
 
+.underline{
+    /* text-decoration: underline !important; */
+    color: azure !important;
+    text-shadow: wheat;
+}
 .navigation{
+    position: relative;
+    width: 100%;
     display: flex;
     padding: 10px;
     background-color: rgb(63, 8, 116);
     justify-content: space-between;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
+    
 
 .navigation a {
     padding: 10px;

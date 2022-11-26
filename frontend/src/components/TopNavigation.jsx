@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 export default function TopNavigation() {
 
     const logoutWithGoogle =  async(e) => {
@@ -8,16 +8,35 @@ export default function TopNavigation() {
         window.open(`${process.env.REACT_APP_API_URL}/auth/logout`,
         "_self")
     } 
+
+    
+let activeClassName = "underline";
   return (
     <>
         <nav className='navigation'>
-            <a href="/">workverse</a>
+            <NavLink to="/"
+                className={({ isActive }) =>
+                isActive ? activeClassName : undefined
+              }
+            >
+                workverse
+            </NavLink>
             <ul>
                 <li>
-                    <Link to="/profile">profile</Link>
+                    <NavLink 
+                        className={({ isActive }) =>
+                        isActive ? activeClassName : undefined
+                      }
+                     to="/profile">
+                        profile
+                    </NavLink>
                 </li>
                 <li>
-                    <Link  onClick={logoutWithGoogle}>logout</Link>
+                    <NavLink  
+                   
+                    onClick={logoutWithGoogle}>
+                        logout
+                    </NavLink>
                 </li>
             </ul>
         </nav>
