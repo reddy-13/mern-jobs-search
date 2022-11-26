@@ -47,7 +47,7 @@ export const authSlice = createSlice({
             state.isLoading = false
             state.isSuccess = false
             state.isError = false
-            state.message = false
+            state.message = ''
         }
     },
     extraReducers: (builder) =>{
@@ -74,7 +74,7 @@ export const authSlice = createSlice({
         })
         .addCase(updatePassword.fulfilled, (state, action) => {
             state.isLoading = false
-            state.isSuccess = false
+            state.isSuccess = true
             state.message = action.payload
         })
         .addCase(updatePassword.rejected, (state, action) => {

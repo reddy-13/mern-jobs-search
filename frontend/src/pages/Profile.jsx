@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { updatePassword } from '../features/authSlice';
+import { updatePassword , reset} from '../features/authSlice';
 import {  toast } from 'react-toastify';
 import Loader from '../components/Loader';
 
@@ -37,7 +37,8 @@ function Profile() {
                 password,
             }
             dispatch(updatePassword(userData))
-        } 
+        }
+        dispatch(reset())
         
     }
 
@@ -45,7 +46,7 @@ function Profile() {
         if (isError) {
             toast.error(message)
         }
-        if (message) {
+        if (isSuccess && message) {
             toast.success(message.msg)
             console.log('msg ', message.msg);            
           }
@@ -54,6 +55,7 @@ function Profile() {
         }else{
             navigate('/')
         }
+        dispatch(reset())
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
     if(isLoading) return <Loader/>

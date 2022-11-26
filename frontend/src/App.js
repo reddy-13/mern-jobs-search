@@ -31,17 +31,13 @@ function App() {
     if (isError) {
       toast.error(message)
     }
-    if (isSuccess || message) {
-      toast.success(message)
-      
-    }
     if(isSuccess || user){
         console.log("login user", user);
         
       }else{
         dispatch(authCheck())
       }
-      dispatch(reset)
+      dispatch(reset())
      
   }, [user, isError, isSuccess, message]);
   
