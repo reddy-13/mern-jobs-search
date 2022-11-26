@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useEffect } from 'react';
-import {useNavigation} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { updatePassword } from '../features/authSlice';
 
@@ -14,7 +14,7 @@ function Profile() {
     const { password, cpassword } = form;
 
     const dispatch = useDispatch()
-    const navigate = useNavigation();
+    const navigate = useNavigate();
 
     const {user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth 
@@ -43,8 +43,10 @@ function Profile() {
     useEffect(() => {
         if(user){
             console.log('profile ', user);
+        }else{
+            navigate('/')
         }
-    })
+    },[user, isError, isSuccess, message])
   return (
     <div className='dashboard profile'>
         <h1>Profile</h1>

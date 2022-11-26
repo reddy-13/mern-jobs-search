@@ -37,6 +37,11 @@ app.get('/',(req,res) => {
     res.send("Welcome to workverse API ")
 })
 
+app.post('/',(req,res) => {
+    console.log('post >',req.body);
+    res.status(200).json({msg : "wokign post route"})
+})
+
 app.use('/auth', authRoutes)
 
 
