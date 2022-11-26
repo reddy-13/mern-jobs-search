@@ -52,30 +52,11 @@ export default function Login() {
         return <App/>
     }
   return (
-    <div>
-        <h1>Login Form</h1>
-        <form onSubmit={submitForm}>
-            <input 
-                name="email" 
-                type="email"
-                id="email"
-                placeholder='Enter your email'
-                value={email}
-                onChange={onChange}
-                />
-            <input 
-                name="password" 
-                type="password"
-                id="password"
-                placeholder='Enter your password'
-                value={password}
-                onChange={onChange}
-                />
-            
-            <button type="submit" name="login">login</button>
-        </form>
+    <div className='login-page '>
+        <img src="https://workverse.in/static/media/workverse-logo-white.bd207f1ebde61336a295.png" width={'200px'} alt="work verse logo"/>
+        <div className="inner">
         <button type='button' onClick={loginWithGoogle}>Login with Google</button>
-        <button type='button' onClick={logoutWithGoogle}>Login out</button>
+        </div>
     </div>
   )
 }
