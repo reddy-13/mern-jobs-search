@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { updatePassword } from '../features/authSlice';
-
+import {  toast } from 'react-toastify';
 
 function Profile() {
     const [form, setForm] = useState({
@@ -41,12 +41,19 @@ function Profile() {
     }
 
     useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+        if (message) {
+            toast.success(message.msg)
+            console.log('msg ', message.msg);            
+          }
         if(isSuccess || user){
-            console.log('profile ', user);
+            console.log('profile ', isSuccess);
         }else{
             navigate('/')
         }
-    },[])
+    }, [user, isError, isSuccess, message, navigate, dispatch])
   return (
     <div className='dashboard profile'>
         <h1>Profile</h1>

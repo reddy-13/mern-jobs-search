@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 // import { Outlet, useNavigate} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import './App.css';
@@ -26,7 +28,13 @@ function App() {
     // })
     //   .then((res) => console.log(res))
     //   .catch((res) => console.log('err', res))
-  
+    if (isError) {
+      toast.error(message)
+    }
+    if (isSuccess || message) {
+      toast.success(message)
+      
+    }
     if(isSuccess || user){
         console.log("login user", user);
         
@@ -34,7 +42,7 @@ function App() {
         dispatch(authCheck())
       }
       dispatch(reset)
-      console.log("message ,", message);
+     
   }, [user, isError, isSuccess, message]);
   
   if(!user){
@@ -46,6 +54,7 @@ function App() {
         </Routes>             
         </div>
     </Router>
+    <ToastContainer/>
     </>
   }
   
@@ -60,6 +69,7 @@ function App() {
         </Routes>             
         </div>
     </Router>
+    <ToastContainer/>
       
     </>
   );

@@ -75,7 +75,7 @@ export const authSlice = createSlice({
         .addCase(updatePassword.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = false
-            state.user = action.payload
+            state.message = action.payload
         })
         .addCase(updatePassword.rejected, (state, action) => {
             console.log("stat rejected", state);
