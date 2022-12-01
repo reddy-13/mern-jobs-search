@@ -48,10 +48,10 @@ function Profile() {
         }
         if (isSuccess && message) {
             toast.success(message.msg)
-            console.log('msg ', message.msg);            
+            // console.log('msg ', message.msg);            
           }
         if(isSuccess || user){
-            console.log('profile ', isSuccess);
+            // console.log('profile ', isSuccess);
         }else{
             navigate('/')
         }

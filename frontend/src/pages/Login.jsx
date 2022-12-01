@@ -40,7 +40,7 @@ export default function Login() {
 
     useEffect(() => {
         if(isSuccess || user){
-            console.log("login user", user);
+            // console.log("login user", user);
             // navigate('/dashboard')
           }else{
             dispatch(authCheck())

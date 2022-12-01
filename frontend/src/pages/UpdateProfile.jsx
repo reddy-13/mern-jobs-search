@@ -28,7 +28,7 @@ function UpdateProfile() {
             [e.target.name]:e.target.value,
         }))
     }
-    console.log("params", params.token);
+    // console.log("params", params.token);
     
     const submitForm = (e) =>{
 
@@ -52,7 +52,7 @@ function UpdateProfile() {
         }
         if (isSuccess && message) {
             toast.success(message.msg)
-            console.log('msg ', message.msg);  
+            // console.log('msg ', message.msg);  
             setEnables(false)
            
         }

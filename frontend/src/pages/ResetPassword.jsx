@@ -28,8 +28,8 @@ function ResetPassword() {
             [e.target.name]:e.target.value,
         }))
     }
-    console.log("params", params.token);
-    console.log("is loading", isLoading);
+    // console.log("params", params.token);
+    // console.log("is loading", isLoading);
     
     const submitForm = (e) =>{
         e.preventDefault();
@@ -50,13 +50,13 @@ function ResetPassword() {
     useEffect(() => {
         if(isError && enables){
             toast.error(message)
-            console.log("user", user);
+            // console.log("user", user);
             setEnables(false)
         }
 
         if (isSuccess && message) {
             toast.success(message.msg)
-            console.log('msg ', message.msg);  
+            // console.log('msg ', message.msg);  
             setEnables(false)
             setForm((prevState) => ({
                 ...prevState,

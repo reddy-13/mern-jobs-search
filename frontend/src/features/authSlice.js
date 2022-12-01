@@ -77,7 +77,7 @@ export const authSlice = createSlice({
         builder
         .addCase(authCheck.pending,(state) =>{
             state.isLoading = true
-            console.log("stat pening", state);
+            // console.log("stat pening", state);
         })
         .addCase(authCheck.fulfilled, (state, action) => {
             state.isLoading = false
@@ -85,7 +85,7 @@ export const authSlice = createSlice({
             state.user = action.payload
         })
         .addCase(authCheck.rejected, (state, action) => {
-            console.log("stat rejected", state);
+            // console.log("stat rejected", state);
             state.isLoading = false
             state.isError = true
             state.message = action.payload
@@ -93,7 +93,7 @@ export const authSlice = createSlice({
         })
         .addCase(updatePassword.pending,(state) =>{
             state.isLoading = true
-            console.log("stat pening", state);
+            // console.log("stat pening", state);
         })
         .addCase(updatePassword.fulfilled, (state, action) => {
             state.isLoading = false
@@ -101,7 +101,7 @@ export const authSlice = createSlice({
             state.message = action.payload
         })
         .addCase(updatePassword.rejected, (state, action) => {
-            console.log("stat rejected", state);
+            // console.log("stat rejected", state);
             state.isLoading = false
             state.isError = true
             state.message = action.payload
@@ -109,7 +109,7 @@ export const authSlice = createSlice({
         })
         .addCase(resetPassword.pending,(state) =>{
             state.isLoading = true
-            console.log("stat pening", state);
+            // console.log("stat pening", state);
         })
         .addCase(resetPassword.fulfilled, (state, action) => {
             state.isLoading = false
@@ -117,7 +117,7 @@ export const authSlice = createSlice({
             state.message = action.payload
         })
         .addCase(resetPassword.rejected, (state, action) => {
-            console.log("stat rejected", state);
+            // console.log("stat rejected", state);
             state.isLoading = false
             state.isError = true
             state.message = action.payload
@@ -125,7 +125,7 @@ export const authSlice = createSlice({
         })
         .addCase(updateUserPassword.pending,(state) =>{
             state.isLoading = true
-            console.log("stat pening", state);
+            // console.log("stat pening", state);
         })
         .addCase(updateUserPassword.fulfilled, (state, action) => {
             state.isLoading = false
@@ -133,7 +133,7 @@ export const authSlice = createSlice({
             state.message = action.payload
         })
         .addCase(updateUserPassword.rejected, (state, action) => {
-            console.log("stat rejected", state);
+            // console.log("stat rejected", state);
             state.isLoading = false
             state.isError = true
             state.message = action.payload
