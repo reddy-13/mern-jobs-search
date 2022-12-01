@@ -56,7 +56,7 @@ function Profile() {
             navigate('/')
         }
         dispatch(reset())
-    }, [user, isError, isSuccess, message, navigate, dispatch])
+    }, [user, isError, isSuccess, message])
 
     if(isLoading) return <Loader/>
 

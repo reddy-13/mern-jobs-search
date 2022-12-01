@@ -2,6 +2,8 @@ import axios from 'axios'
 
 const AUTH_CHECK_URL = '/auth/login/success'
 const UPDATE_PASSWORD_URL ='/auth/profile/password';
+const USER_PASSWORD_RESET = '/auth/user/password/reset'
+const USER_PASSWORD_UPDATE = '/auth/user/password/update' // update userpassword using token
 
 // Auth check
 const authCheck = async (userData) =>{
@@ -24,11 +26,31 @@ const updatePassword = async (userData) =>{
     return response.data
 }
 
+// request for reset password 
+const resetPassword = async (userData) =>{
+    
+    const response = await axios.post(USER_PASSWORD_RESET,userData,{
+        headers: { 'Content-Type': 'application/json' },
+    })
+    return response.data
+}
+
+
+// updatepassword from token
+const updateUserPassword = async (userData) =>{
+    
+    const response = await axios.post(USER_PASSWORD_UPDATE,userData,{
+        headers: { 'Content-Type': 'application/json' },
+    })
+    return response.data
+}
 
 
 const authService = {
     authCheck,
     updatePassword,
+    resetPassword,
+    updateUserPassword,
 }
 
 export default authService;

@@ -15,6 +15,7 @@ import Profile from './pages/Profile';
 import ErrorPage from './pages/error-page';
 import UpdateProfile from './pages/UpdateProfile';
 import Root from './pages/Root';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -31,9 +32,9 @@ function App() {
     // })
     //   .then((res) => console.log(res))
     //   .catch((res) => console.log('err', res))
-    if (isError) {
-      toast.error(message)
-    }
+    // if (isError) {
+    //   toast.error(message)
+    // }
     if(isSuccess || user){
         console.log("login user", user);
         
@@ -53,7 +54,11 @@ function App() {
     index: true,
   },
   {
-    path : '/reset/:token',
+    path:'/reset',
+    element: <ResetPassword/>
+  },
+  {
+    path : '/reset/password/:token',
     element : <UpdateProfile/>
   }
 ]);
@@ -80,7 +85,10 @@ const protectedRouter = createBrowserRouter([
 )
 
   return (
+    <>
     <RouterProvider router={user ? protectedRouter : router} />
+    <ToastContainer/>
+    </>
   );
 }
 

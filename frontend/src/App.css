@@ -176,3 +176,20 @@ body::-webkit-scrollbar-thumb {
     background-color: rgb(74, 25, 119);
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
+
+
+/* rest page */
+
+.reset-text{
+    color: rgb(28, 45, 56);
+    line-height: 21px;
+    width: 400px;
+    font-size: 13px;
+    letter-spacing: normal;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.disabled-button{
+    background-color: rgb(114, 113, 116) !important;
+}

@@ -2,18 +2,18 @@ import React, {useState} from 'react'
 import { useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateUserPassword, reset } from '../features/authSlice';
+import { resetPassword , reset } from '../features/authSlice';
 import {  toast } from 'react-toastify';
-function UpdateProfile() {
+function ResetPassword() {
 
     const params = useParams()
     const [form, setForm] = useState({
-        password : '',
-        cpassword : '',
+        email : '',
     });
+
     const [enables, setEnables] = useState(false);
 
-    const { password, cpassword } = form;
+    const { email } = form;
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -29,20 +29,18 @@ function UpdateProfile() {
         }))
     }
     console.log("params", params.token);
+    console.log("is loading", isLoading);
     
     const submitForm = (e) =>{
-
         e.preventDefault();
-        if(password.length === 0 &&  password !== cpassword){
-            return false
-        }else if(password.length > 0  && (password === cpassword)){
+        if(email.length > 6){
             const userData = {
-                password,
-                token: params.token
+                email :email
             }
-            dispatch(updateUserPassword(userData))
+            setEnables(true);
+            dispatch(resetPassword(userData))
         }
-        // dispatch(reset())
+        dispatch(reset())
         
     }
 
@@ -54,38 +52,35 @@ function UpdateProfile() {
             toast.success(message.msg)
             console.log('msg ', message.msg);  
             setEnables(false)
-           
+            setForm((prevState) => ({
+                ...prevState,
+                email:"",
+            }))  
         }
         dispatch(reset())
         
     },[user, isError, isSuccess, message])
   return (
     <div className='dashboard profile vh100'>
-        <h1>Password verify</h1>
+        <h1>WORKVERSE</h1>
 
         <form className='form' onSubmit={submitForm}>
-            <h3>UPDATE PASSWORD</h3>
+            <h3 style={{fontSize:"22px"}}>Reset your password </h3>
+            <p className='reset-text'>To reset your password, enter your email below and submit.<br/> An email will be sent to you with instructions about how to complete the process.</p>
+            <label style={{textAlign:'left'}} htmlFor='email'>Email address</label>
             <input 
-                type="password" 
-                name="password" 
-                id="password" 
-                value={password}
+                type="email" 
+                name="email" 
+                id="email" 
+                value={email}
                 onChange={onChange}
-                placeholder={'Enter new password'}
-                 />
-            <input 
-                type="password" 
-                name="cpassword" 
-                id="cpassword" 
-                value={cpassword}
-                onChange={onChange}
-                placeholder={'Confirm new password'}
+                placeholder={'Enter Your email'}
                  />
 
-            <input type='submit' name="update" value={'Update your password'} />
+            <input type='submit' name="update" className={` ${enables ? 'disabled-button' : '' }`} value={'Reset password'} disabled={enables} />
         </form>
     </div>)
 }
 
 
-export default UpdateProfile
+export default ResetPassword

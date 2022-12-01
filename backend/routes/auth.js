@@ -53,6 +53,7 @@ router.get(
     }
 )
 
+// update password for logged in user
 router.post('/profile/password', async (req, res) => {
     console.log('res ', req.user);
     if (req.user) {
@@ -60,22 +61,65 @@ router.post('/profile/password', async (req, res) => {
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(req.body.password, salt)
         // util.promisify
-        const id = async () => {
-            const res = await db.query("UPDATE users SET password= ? where googleId = ?",
+       
+           db.query("UPDATE users SET password= ? where googleId = ?",
                 [hashedPassword, req.user[0].googleId],
                 (err, result) => {
                     if (err) {
                         return err
                     }
-                    return result
+                    res.json({"success" : true , message : 'password updated'})
                 })
-            return res;
-        }
-        res.send("fuck")
+       
+        
+       
         const result = id()
         console.log('query', result);
     } else {
-        res.status(401).json({ error: true, msg: "user id not found" })
+        res.status(401).json({ error: true, message: "user id not found" })
+    }
+})
+
+
+router.post('/test',(req,res) => {
+    const token = req.body.token;
+    const verified_token = jwt.verify(token, process.env.JWT_RESET_PASSWORD_KEY)
+    res.status(200).json({
+        token : token,
+        verified_token: verified_token
+    })
+})
+
+// update password for reset metho
+
+router.post('/user/password/update', async (req, res) => {
+    // console.log('res ', req.body.token);
+    if (req.body.token) {
+        // Hash password
+        let verified_token
+        try{
+             verified_token =  jwt.verify(req.body.token, process.env.JWT_RESET_PASSWORD_KEY)
+        }catch(err){
+           
+            res.status(401).json({ error: true, message: `request for reset password. Your ${err.name} `})
+        }
+       
+      
+
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(req.body.password, salt)
+        // util.promisify
+        db.query("UPDATE users SET password= ? where id = ?",
+                [hashedPassword, verified_token.id],
+                (err, result) => {
+                    if (err) {
+                        return err
+                    }
+                    res.json({"success" : true , message : 'password updated'})
+                }
+        );
+    } else {
+        res.status(401).json({ error: true, message: "user id not found" })
     }
 })
 
@@ -109,8 +153,9 @@ const sendMail = async (mailOptions) => {
 }
 
 
-router.post('/mail', async (req, res) => {
-    // res.send(` ${process.env.MAIL_PASS}`) // for debugging
+router.post('/user/password/reset', async (req, res) => {
+    // res.send(` ${process.env.MAIL_USER}`) // for debugging
+
     const email = req.body.email
     const subject = 'Password reset request'
     if (email) {
@@ -118,21 +163,21 @@ router.post('/mail', async (req, res) => {
             [email],
             (err, result) => {
                 if (err) {
-                    res.status(401).json({ error: true, msg: 'Email id not fount' })
+                    res.status(401).json({ error: true, message: 'Email id not fount' })
                 }
-
+                console.log("id >.", result[0].id);
                 const token = jwt.sign({ id: result[0].id }, process.env.JWT_RESET_PASSWORD_KEY, { expiresIn: '20m' });
                 const transporter = nodemailer.createTransport({
                     host: "mail.greddy.in",
                     port: 465,
                     secure: true,
                     auth: {
-                        user: `${process.env.MAIL_USER}`, // generated ethereal user
-                        pass: `${process.env.MAIL_PASS}`, // generated ethereal password
+                        user: `${process.env.MAIL_USER}`, // username kept in .env file
+                        pass: `${process.env.MAIL_PASS}`, // password kept in .env file
                     },
                 }) // transporter
                 const mailOptions = {
-                    from: `"👻 workverse" <mailer@greddy.in>`,
+                    from: `"👻 workverse" <${process.env.MAIL_USER}>`,
                     to: `${email}`,
                     subject: `${subject}`,
                     html: `
@@ -145,9 +190,9 @@ router.post('/mail', async (req, res) => {
                     console.log("sending");
                     if (error) {
                         console.log(error);
-                        res.status(401).json({ error: false, msg: "Somthing went worng, Please try gaian" })
+                        res.status(401).json({ error: false, message: "Somthing went worng, Please try gaian" })
                     } else {
-                        res.status(200).json({ success: true, msg: "Mail sent" })
+                        res.status(200).json({ success: true, message: "Mail sent" })
                     }
                 });
 
@@ -163,7 +208,7 @@ router.post('/mail', async (req, res) => {
 
 
     } else {
-        res.status(401).json({ error: true, msg: "Wrong email" })
+        res.status(401).json({ error: true, message: "Wrong email" })
     }
 
 })

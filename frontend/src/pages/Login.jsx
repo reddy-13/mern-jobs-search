@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate , Link} from 'react-router-dom'
 import App from '../App'
 import { authCheck, reset  } from '../features/authSlice'
 
@@ -56,6 +56,7 @@ export default function Login() {
         <img src="https://workverse.in/static/media/workverse-logo-white.bd207f1ebde61336a295.png" width={'200px'} alt="work verse logo"/>
         <div className="inner">
         <button type='button' onClick={loginWithGoogle}>Login with Google</button>
+        <Link to='reset' style={{color:'#fff' , marginTop: '5px'}}>Reset password</Link>
         </div>
     </div>
   )
