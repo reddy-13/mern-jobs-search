@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "home": "https://workverse-reddy-13.vercel.app/",
+  "home": "https://workverse-reddy-13.vercel.app",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",
