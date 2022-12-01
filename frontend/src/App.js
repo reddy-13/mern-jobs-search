@@ -14,6 +14,7 @@ import TopNavigation from './components/TopNavigation';
 import Profile from './pages/Profile';
 import ErrorPage from './pages/error-page';
 import UpdateProfile from './pages/UpdateProfile';
+import Root from './pages/Root';
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -62,7 +63,7 @@ const protectedRouter = createBrowserRouter([
   
   {
     path: "/",
-    element: <App/>,
+    element: <Root/>,
     children: [
       { 
         index: true,  

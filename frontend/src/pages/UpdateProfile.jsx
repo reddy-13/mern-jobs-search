@@ -43,7 +43,7 @@ function UpdateProfile() {
         
     }
   return (
-    <div className='dashboard profile'>
+    <div className='dashboard profile vh100'>
         <h1>Password verify</h1>
 
         <form className='form' onSubmit={submitForm}>

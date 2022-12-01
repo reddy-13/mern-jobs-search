@@ -144,6 +144,11 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
 }
 
+/* for min heigh 100vh */
+.vh100{
+    min-height: 100vh !important;
+}
+
 .form input{
     
     padding: 8px;
