@@ -61,7 +61,12 @@ function App() {
     path : '/reset/password/:token',
     element : <UpdateProfile/>
   }
-]);
+],
+{
+    basename: "/",
+  }
+
+);
 
 
 const protectedRouter = createBrowserRouter([
@@ -82,6 +87,9 @@ const protectedRouter = createBrowserRouter([
   },
   
 ],
+{
+  basename: "/",
+}
 )
 
   return (
