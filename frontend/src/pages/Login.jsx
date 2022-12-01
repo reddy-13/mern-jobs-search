@@ -45,7 +45,8 @@ export default function Login() {
           }else{
             dispatch(authCheck())
           }
-        //   dispatch(reset)
+          
+        //   dispatch(reset())
     },[user, isError, isSuccess, message])
 
     if(user){

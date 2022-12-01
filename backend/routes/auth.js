@@ -163,9 +163,13 @@ router.post('/user/password/reset', async (req, res) => {
             [email],
             (err, result) => {
                 if (err) {
-                    res.status(401).json({ error: true, message: 'Email id not fount' })
+                    res.status(401).json({ error: true, message: 'Somthing is woring' })
                 }
-                console.log("id >.", result[0].id);
+                if(result.length == 0){
+                    res.status(401).json({ error: true, message: 'Email no fount' })
+                }
+                if(result.length > 0){
+                    console.log("id >.", result[0].id);
                 const token = jwt.sign({ id: result[0].id }, process.env.JWT_RESET_PASSWORD_KEY, { expiresIn: '20m' });
                 const transporter = nodemailer.createTransport({
                     host: "mail.greddy.in",
@@ -195,6 +199,9 @@ router.post('/user/password/reset', async (req, res) => {
                         res.status(200).json({ success: true, message: "Mail sent" })
                     }
                 });
+
+                }
+                
 
 
             }

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useEffect } from 'react';
-import {useNavigate, useParams} from 'react-router-dom'
+import {Link, useNavigate, useParams} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { resetPassword , reset } from '../features/authSlice';
 import {  toast } from 'react-toastify';
@@ -45,9 +45,15 @@ function ResetPassword() {
     }
 
     useEffect(() => {
-        if(isError){
+        dispatch(reset())
+    },[])
+    useEffect(() => {
+        if(isError && enables){
             toast.error(message)
+            console.log("user", user);
+            setEnables(false)
         }
+
         if (isSuccess && message) {
             toast.success(message.msg)
             console.log('msg ', message.msg);  
@@ -78,6 +84,7 @@ function ResetPassword() {
                  />
 
             <input type='submit' name="update" className={` ${enables ? 'disabled-button' : '' }`} value={'Reset password'} disabled={enables} />
+            <Link to='/' style={{fontSize: "12px" ,fontWeight: '200', marginTop: '10px'}}>Back</Link>
         </form>
     </div>)
 }
